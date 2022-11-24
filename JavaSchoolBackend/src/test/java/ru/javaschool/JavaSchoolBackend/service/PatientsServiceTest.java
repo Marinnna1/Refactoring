@@ -1,0 +1,35 @@
+package ru.javaschool.JavaSchoolBackend.service;
+
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.junit.jupiter.MockitoExtension;
+import ru.javaschool.JavaSchoolBackend.dao.PatientsDao;
+import ru.javaschool.JavaSchoolBackend.dto.PatientDto;
+
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
+
+@ExtendWith(MockitoExtension.class)
+public class PatientsServiceTest {
+
+    @Mock
+    PatientsDao patientsDao;
+
+    @InjectMocks
+    PatientsService patientsService;
+
+
+
+    @Test
+    @DisplayName("Test add patient with null")
+    void addPatientNullTest() {
+        PatientDto patientDto = new PatientDto();
+        patientsService.addPatient(patientDto);
+        verify(patientsDao, times(0)).findPatientByName(patientDto.getName());
+    }
+
+
+}
